@@ -133,8 +133,10 @@ export async function createServerApp(
 
 if (!isTest) {
     createServerApp().then(({ httpServer }) => {
-        httpServer.listen(3000, () => {
-            console.log('http://localhost:3000')
+        const host = process.env.HOST || 'localhost'
+        const port = process.env.PORT || 3000
+        httpServer.listen(port, host, () => {
+            console.log(`http://${host}:${port}`)
         })
     })
 }
